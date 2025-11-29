@@ -30,16 +30,16 @@ const Main = (props : MainProps) => {
                         return <tr key={vj.id}>
                             <td>{ vj.nombre }</td>
                             <td>{ vj.categoria }</td>
-                            <td>{ vj.plataformas.join(",") }</td>
+                            <td>{ vj.plataformas!.join(",") }</td>
                             <td>{ vj.fecha }</td>
                             <td>{ vj.estado }</td>
                             <td>
                                 <button className="btn btn-warning btn-sm me-1"
-                                    onClick={ () => { props.onEditVideojuego(vj.id) } }>
+                                    onClick={ () => { props.onEditVideojuego(vj.id!) } }>
                                         Editar
                                 </button>
                                 <button className="btn btn-danger btn-sm"
-                                    onClick={ () => { props.onDeleteVideojuego(vj.id)} }>
+                                    onClick={ () => { props.onDeleteVideojuego(vj.id!)} }>
                                     Eliminar
                                 </button>
                             </td>

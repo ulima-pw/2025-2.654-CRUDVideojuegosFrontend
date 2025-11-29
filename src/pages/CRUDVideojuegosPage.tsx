@@ -4,6 +4,7 @@ import Main from "../components/Main"
 import ModalVideojuegos from "../components/ModalVideojuegos"
 
 import "./CRUDVideojuegosPage.css"
+import { BACKEND_URL } from "../config"
 
 export interface Videojuego {
     id? : string
@@ -34,25 +35,25 @@ const CRUDVideojuegosPage = () => {
     const [idVideojuegoAEditar, setIdVideojuegoAEditar] = useState<string|undefined>(undefined)
 
     const httpObtenerVideojuegos = async () => {
-        const resp = await fetch("http://localhost:5002/videojuegos")
+        const resp = await fetch(`${BACKEND_URL}/videojuegos`)
         const data = await resp.json()
         setListaVideojuegos(data)
     }
 
     const httpObtenerCategorias = async () => {
-        const resp = await fetch("http://localhost:5002/categorias")
+        const resp = await fetch(`${BACKEND_URL}/categorias`)
         const data = await resp.json()
         setListaCategorias(data)
     }
 
     const httpObtenerPlataformas = async () => {
-        const resp = await fetch("http://localhost:5002/plataformas")
+        const resp = await fetch(`${BACKEND_URL}/plataformas`)
         const data = await resp.json()
         setListaPlataformas(data)
     }
 
     const httpEliminarVideojuego = async (id: string) => {
-        const resp = await fetch(`http://localhost:5002/videojuegos/eliminar?id=${id}`)
+        const resp = await fetch(`${BACKEND_URL}/videojuegos/eliminar?id=${id}`)
         if (resp.status == 200) {
             setFlagRecarga(!flagRecarga)
         }
@@ -62,7 +63,7 @@ const CRUDVideojuegosPage = () => {
         vj.plataformas = undefined
         vj.id = undefined
         vj.fecha = undefined
-        const resp = await fetch("http://localhost:5002/videojuegos/crear", {
+        const resp = await fetch(`${BACKEND_URL}/videojuegos/crear`, {
             method : "POST",
             headers : {
                 "Content-Type" : "application/json"
@@ -77,7 +78,7 @@ const CRUDVideojuegosPage = () => {
     }
 
     const httpUpdateVideojuego = async (vj : Videojuego) => {
-        const resp = await fetch("http://localhost:5002/videojuegos/actualizar", {
+        const resp = await fetch(`${BACKEND_URL}/videojuegos/actualizar`, {
             method : "POST",
             headers : {
                 "Content-Type" : "application/json"
